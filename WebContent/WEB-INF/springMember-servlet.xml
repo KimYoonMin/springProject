@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<context:annotation-config/>
+	
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>jdbc/oracle</value>
+		</property>
+		<property name="resourceRef" value="true"/>		
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>	
+	
+	
+	<bean class="member.controller.MemberController"/>
+	<!-- <bean id="/checkMember_example.mem" class="member.controller.CheckMember_exampleController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	
+	<bean id="/member_delete.mem" class="member.controller.Member_deleteController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	
+	<bean id="/member_edit_function.mem" class="member.controller.Member_edit_functionController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	
+	<bean id="/member_edit.mem" class="member.controller.Member_editController"/>
+	
+	<bean id="/member_input.mem" class="member.controller.Member_inputController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	
+	<bean id="/memberAll.mem" class="member.controller.MemberAllController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	
+	<bean id="/member.mem" class="member.controller.MemberViewController"/>
+	
+	<bean id="/memberSsn.mem" class="member.controller.MemberSsnController"/> -->
+	
+	<bean id="memberDAO" class="member.dao.MemberDAOImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+</beans>
